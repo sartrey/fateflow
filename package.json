@@ -1,0 +1,24 @@
+{
+  "name": "timeaxis",
+  "version": "0.0.0",
+  "description": "a simple time management tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sartrey/timeaxis.git"
+  },
+  "keywords": [
+    "time",
+    "tick",
+    "task"
+  ],
+  "author": "Sartrey Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sartrey/timeaxis/issues"
+  },
+  "homepage": "https://github.com/sartrey/timeaxis#readme"
+}
