@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "description": "a simple time management tool",
   "main": "index.js",
+  "bin": {
+    "timeaxis": "bin/timeaxis"
+  },
   "scripts": {
-    "test": "test"
+    "dev": "NODE_ENV=development node index.js",
+    "make": "NODE_ENV=production node build.js",
+    "test": "node test"
   },
   "repository": {
     "type": "git",
@@ -20,5 +25,11 @@
   "bugs": {
     "url": "https://github.com/sartrey/timeaxis/issues"
   },
-  "homepage": "https://github.com/sartrey/timeaxis#readme"
+  "homepage": "https://github.com/sartrey/timeaxis#readme",
+  "dependencies": {
+    "epii-server": "^0.3.2"
+  },
+  "devDependencies": {
+    "epii-render": "^0.6.2"
+  }
 }
