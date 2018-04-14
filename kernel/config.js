@@ -1,9 +1,9 @@
 const os = require('os')
 const path = require('path')
+const assist = require('./assist.js')
 
 const DEPLOY_ROOT = path.join(os.homedir(), '.timeaxis')
-
-module.exports = {
+const CONFIG = {
   name: 'timeaxis',
   port: 8080,
   path: {
@@ -24,5 +24,25 @@ module.exports = {
     static: '__static'
   },
   deploy: null,
-  online: process.env.NODE_ENV === 'production'
+  online: process.env.NODE_ENV === 'production',
+  handle: null
 }
+
+async function getDeployConfig() {
+  var deployPath = path.join(DEPLOY_ROOT, 'config.json')
+  // todo - load config manually
+  var deployBody = JSON.parse(await assist.readFile(deployPath))
+  CONFIG.deploy = deployBody
+  return deployBody
+}
+
+function setDeployConfig(input) {
+  var deployPath = path.join(DEPLOY_ROOT, 'config.json')
+  return assist.writeFile(deployPath, JSON.stringify(input))
+}
+
+CONFIG.handle = {
+  getDeployConfig,
+  setDeployConfig
+}
+module.exports = CONFIG

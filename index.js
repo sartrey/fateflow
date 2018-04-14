@@ -2,13 +2,11 @@ const path = require('path')
 const assist = require('./kernel/assist.js')
 const config = require('./kernel/config.js')
 
-function setupServer() {
+async function setupServer() {
   assist.makeDeepDir(config.path.deploy)
-  var configPath = path.join(config.path.deploy, 'config.json')
   try {
-    var configBody = require(configPath)
-    config.deploy = configBody
-  } catch(error) {
+    await config.handle.getDeployConfig()
+  } catch (error) {
     console.log(`access http://localhost:${config.port}/admin/deploy`)
   }
 }
@@ -20,7 +18,7 @@ function startServer() {
   }
 }
 
-(function main() {
-  setupServer()
+(async function main() {
+  await setupServer()
   startServer()
 })()
