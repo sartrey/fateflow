@@ -27,7 +27,9 @@
   },
   "homepage": "https://github.com/sartrey/timeaxis#readme",
   "dependencies": {
-    "epii-server": "^0.3.2"
+    "epii-server": "^0.3.2",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.6"
   },
   "devDependencies": {
     "epii-render": "^0.6.2"

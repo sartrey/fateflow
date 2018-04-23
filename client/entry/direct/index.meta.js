@@ -1,11 +1,11 @@
 module.exports = {
   base: 'modern',
   head: {
-    styles: 'client/start/index.css'
+    styles: 'client/entry/direct/index.css'
   },
   body: {
     scripts: [
-      'client/start/index.js'
+      'client/entry/direct/index.js'
     ]
   }
 }

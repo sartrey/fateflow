@@ -9,7 +9,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    fetch('/proxy/get-deploy-config')
+    fetch('/proxy/getDeployConfig')
     .then(response => response.json())
     .then(json => {
       this.setState({ input: JSON.stringify(json.model, null, 2) })
@@ -28,7 +28,7 @@ export default class extends Component {
       console.error(error)
       return alert('input error')
     }
-    fetch('/proxy/set-deploy-config', {
+    fetch('/proxy/setDeployConfig', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
