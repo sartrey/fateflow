@@ -1,12 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
-const config = require('../../kernel/config.js')
+const config = require('../../../kernel/config.js')
 
-const source = {
+const SOURCES = {
   created: false,
   context: null,
-  defines: []
+  defines: {}
 }
 
 /**
@@ -55,6 +55,7 @@ function loadDefines(context, rootdir) {
   var sources = {}
   var files = fs.readdirSync(rootdir).filter((e) => /\.js$/.test(e))
   files.forEach((file) => {
+    if (file === '_source.js') return
     var createDefine = require(path.join(rootdir, file))
     var modelName = file.slice(0, - 3).split('-')
       .map(e => e[0].toUpperCase() + e.slice(1)).join('')
@@ -63,24 +64,18 @@ function loadDefines(context, rootdir) {
   return sources
 }
 
-module.exports = async function (ctx, next) {
-  // skip start page
-  const skipURLs = [
-    '/', '/admin/deploy', /^\/proxy/
-  ]
-  if (skipURLs.some(e => e.test ? e.test(ctx.url) : e === ctx.url)) {
-    return next()
-  }
+function getSources() {
   // try to load source
-  if (! source.created) {
-    source.context = makeContext(config.deploy.mysql)
-    source.defines = loadDefines(
-      source.context,
+  if (! SOURCES.created) {
+    SOURCES.context = makeContext(config.deploy.mysql)
+    SOURCES.defines = loadDefines(
+      SOURCES.context,
       path.join(config.path.root, config.path.server.datasource, 'mysql')
     )
     // source.defines.forEach((define) => define.sync())
-    source.created = true
-    ctx.app.epii.cache('source', source)
+    SOURCES.created = true
   }
-  await next()
+  return SOURCES
 }
+
+module.exports = getSources

@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Material Icons'),
-       url('/vendor/MaterialIcons.ttf') format('truetype');
+       url('/__static/vendor/MaterialIcons.ttf') format('truetype');
 }
 
 .md-icons {
@@ -11,7 +11,8 @@
   font-weight: normal;
   font-style: normal;
   display: inline-block;
-  line-height: 1;
+  line-height: 1em;
+  vertical-align: middle;
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
@@ -31,6 +32,7 @@
 * {
   margin: 0;
   padding: 0;
+  line-height: 1rem;
 }
 
 .pull-right {
@@ -70,16 +72,18 @@ body {
 }
 
 .btn {
+  display: block;
+  border-radius: 1px;
   cursor: pointer;
-  transition: .3s;
+  transition: .2s;
   user-select: none;
 
-  &.btn-f00:hover {
-    color: #900;
+  &:hover {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
   }
 
-  &.btn-0f0:hover {
-    color: #360;
+  &:active {
+    box-shadow: none;
   }
 
   &.btn-lg {
@@ -131,11 +135,6 @@ body {
   }
 }
 
-.text-halt {
-  margin: .75rem;
-  color: #B71C1C;
-}
-
 .alert {
   color: #fff;
 
@@ -144,14 +143,76 @@ body {
   }
 }
 
-.alert-halt {
+.badge {
+  border-radius: 1px;
+  user-select: none;
+}
+
+.flex-1 {
+  flex: 1 !important;
+}
+
+.area-halt {
+  color: #fff;
   background: #E53935;
 }
 
-.alert-warn {
-  background: #FFB300;
+.area-busy {
+  color: #fff;
+  background: #FFB300; 
 }
 
-.alert-done {
+.area-done {
+  color: #fff;
   background: #43A047;
+}
+
+.area-idle {
+  color: #fff;
+  background: #039BE5;
+}
+
+.area-stroke {
+  border: 1px solid #ccc;
+  background: #fff;
+
+  &.area-halt {
+    color: #E53935;
+    border-color: #E53935;
+  }
+  
+  &.area-busy {
+    color: #FFB300; 
+    border-color: #FFB300; 
+  }
+  
+  &.area-done {
+    color: #43A047;
+    border-color: #43A047; 
+  }
+  
+  &.area-idle {
+    color: #039BE5;
+    border-color: #039BE5; 
+  }
+}
+
+.area-border {
+  border: 1px solid #ccc;
+
+  &.area-halt {
+    border-color: #D32F2F;
+  }
+
+  &.area-busy {
+    border-color: #FFA000;
+  }
+
+  &.area-done {
+    border-color: #388E3C;
+  }
+
+  &.area-idle {
+    border-color: #0288D1;
+  }
 }

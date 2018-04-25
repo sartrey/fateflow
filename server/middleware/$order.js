@@ -1,3 +1,1 @@
-module.exports = [
-  'source'
-]
+module.exports = ['global']

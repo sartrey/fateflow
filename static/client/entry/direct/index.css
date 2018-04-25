@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Material Icons'),
-       url('/vendor/MaterialIcons.ttf') format('truetype');
+       url('/__static/vendor/MaterialIcons.ttf') format('truetype');
 }
 
 .md-icons {
@@ -11,7 +11,8 @@
   font-weight: normal;
   font-style: normal;
   display: inline-block;
-  line-height: 1;
+  line-height: 1em;
+  vertical-align: middle;
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
@@ -31,6 +32,7 @@
 * {
   margin: 0;
   padding: 0;
+  line-height: 1rem;
 }
 
 .pull-right {
@@ -70,17 +72,19 @@ body {
 }
 
 .btn {
+  display: block;
+  border-radius: 1px;
   cursor: pointer;
-  transition: .3s;
+  transition: .2s;
   user-select: none
 }
 
-.btn.btn-f00:hover {
-  color: #900;
+.btn:hover {
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
 }
 
-.btn.btn-0f0:hover {
-  color: #360;
+.btn:active {
+  box-shadow: none;
 }
 
 .btn.btn-lg {
@@ -131,11 +135,6 @@ body {
       background: #EEEEEE;
     }
 
-.text-halt {
-  margin: .75rem;
-  color: #B71C1C;
-}
-
 .alert {
   color: #fff;
 }
@@ -144,16 +143,78 @@ body {
     color: #fff;
   }
 
-.alert-halt {
+.badge {
+  border-radius: 1px;
+  user-select: none;
+}
+
+.flex-1 {
+  flex: 1 !important;
+}
+
+.area-halt {
+  color: #fff;
   background: #E53935;
 }
 
-.alert-warn {
-  background: #FFB300;
+.area-busy {
+  color: #fff;
+  background: #FFB300; 
 }
 
-.alert-done {
+.area-done {
+  color: #fff;
   background: #43A047;
+}
+
+.area-idle {
+  color: #fff;
+  background: #039BE5;
+}
+
+.area-stroke {
+  border: 1px solid #ccc;
+  background: #fff
+}
+
+.area-stroke.area-halt {
+  color: #E53935;
+  border-color: #E53935;
+}
+
+.area-stroke.area-busy {
+  color: #FFB300;
+  border-color: #FFB300;
+}
+
+.area-stroke.area-done {
+  color: #43A047;
+  border-color: #43A047;
+}
+
+.area-stroke.area-idle {
+  color: #039BE5;
+  border-color: #039BE5;
+}
+
+.area-border {
+  border: 1px solid #ccc
+}
+
+.area-border.area-halt {
+  border-color: #D32F2F;
+}
+
+.area-border.area-busy {
+  border-color: #FFA000;
+}
+
+.area-border.area-done {
+  border-color: #388E3C;
+}
+
+.area-border.area-idle {
+  border-color: #0288D1;
 }
 
 .modal .wrapper {
@@ -280,3 +341,134 @@ footer {
     line-height: 1rem;
     cursor: pointer;
   }
+
+.card {
+  display: flex;
+  margin: .75rem;
+  padding: .5rem;
+  border-radius: 1px;
+  background: #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.card > div {
+    margin-right: .5rem
+  }
+
+.card > div:last-of-type {
+  margin-right: 0;
+}
+
+.card .btn, .card .badge {
+    display: inline-block;
+    font-size: 1rem;
+    box-sizing: border-box;
+    height: 2rem;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+
+.card .btn i, .card .badge i {
+      font-size: 18px;
+      margin-top: -.2rem;
+    }
+
+.card .badge {
+    padding: .5rem 1rem;
+  }
+
+.card .btn {
+    padding: .5rem .75rem;
+    background: #f3f3f3
+  }
+
+.card .btn:hover {
+  background: #ddd;
+}
+
+.card .btn + .btn {
+    margin-left: .5rem;
+  }
+
+.card .event-name p {
+      padding: .5rem;
+    }
+
+.card input {
+    box-sizing: border-box;
+    font-size: 1rem;
+    display: block;
+    height: 100%;
+    padding: 5px .5rem;
+    border: 2px solid #ccc;
+    border-radius: 1px;
+    outline: none
+  }
+
+.card input:hover {
+  border-color: #aaa;
+}
+
+.card input:focus {
+  border-color: #666;
+}
+
+.event-name {
+  overflow: auto;
+  flex: 1
+}
+
+.event-name:hover {
+  background: #FAFAFA;
+}
+
+.event-name p {
+    white-space: nowrap;
+}
+
+.event-list {
+  margin: .75rem;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.event-list .event-item {
+    display: flex;
+    padding: .5rem;
+    background: #fff;
+    border-bottom: 1px solid #eee
+  }
+
+.event-list .event-item:hover {
+  background: #f6f6f6;
+  cursor: pointer;
+}
+
+.event-list .event-item:last-of-type {
+  border-bottom: none;
+}
+
+.event-list .btn {
+    padding: .2rem
+  }
+
+.event-list .btn:hover {
+  color: #fff;
+  background: #039BE5;
+}
+
+.event-list .badge {
+    display: block;
+    font-size: .75rem;
+    width: 2rem;
+    margin-right: .5rem;
+    padding: .15rem;
+    text-align: center;
+  }
+
+.event-list .event-name p {
+      padding: .15rem;
+    }
+
+.event-list .event-name:hover {
+  background: transparent;
+}

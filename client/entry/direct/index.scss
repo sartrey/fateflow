@@ -1,2 +1,137 @@
 @import "../theme.scss";
 @import "../frame.scss";
+
+.card {
+  display: flex;
+  margin: .75rem;
+  padding: .5rem;
+  border-radius: 1px;
+  background: #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+
+  > div {
+    margin-right: .5rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  .btn, .badge {
+    display: inline-block;
+    font-size: 1rem;
+    box-sizing: border-box;
+    height: 2rem;
+    white-space: nowrap;
+    vertical-align: top;
+
+    i {
+      font-size: 18px;
+      margin-top: -.2rem;
+    }
+  }
+
+  .badge {
+    padding: .5rem 1rem;
+  }
+
+  .btn {
+    padding: .5rem .75rem;
+    background: #f3f3f3;
+
+    &:hover {
+      background: #ddd;
+    }
+  }
+
+  .btn + .btn {
+    margin-left: .5rem;
+  }
+
+  .event-name {
+    p {
+      padding: .5rem;
+    }
+  }
+
+  input {
+    box-sizing: border-box;
+    font-size: 1rem;
+    display: block;
+    height: 100%;
+    padding: 5px .5rem;
+    border: 2px solid #ccc;
+    border-radius: 1px;
+    outline: none;
+
+    &:hover {
+      border-color: #aaa;
+    }
+
+    &:focus {
+      border-color: #666;
+    }
+  }
+}
+
+.event-name {
+  overflow: auto;
+  flex: 1;
+
+  &:hover {
+    background: #FAFAFA;
+  }
+
+  p {
+    white-space: nowrap
+  }
+}
+
+.event-list {
+  margin: .75rem;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+
+  .event-item {
+    display: flex;
+    padding: .5rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+
+    &:hover {
+      background: #f6f6f6;
+      cursor: pointer;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  .btn {
+    padding: .2rem;
+
+    &:hover {
+      color: #fff;
+      background: #039BE5;
+    }
+  }
+
+  .badge {
+    display: block;
+    font-size: .75rem;
+    width: 2rem;
+    margin-right: .5rem;
+    padding: .15rem;
+    text-align: center;
+  }
+
+  .event-name {
+    p {
+      padding: .15rem;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
