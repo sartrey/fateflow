@@ -1,0 +1,102 @@
+@import "../../theme.scss";
+@import "../../frame.scss";
+
+.card {
+  .event-name {
+    p {
+      padding: .5rem;
+    }
+  }
+
+  input {
+    box-sizing: border-box;
+    font-size: 1rem;
+    display: block;
+    height: 100%;
+    padding: 5px .5rem;
+    border: 2px solid #ccc;
+    border-radius: 1px;
+    outline: none;
+
+    &:hover {
+      border-color: #aaa;
+    }
+
+    &:focus {
+      border-color: #666;
+    }
+  }
+}
+
+.event-name {
+  overflow: auto;
+  flex: 1;
+
+  &:hover {
+    background: #FAFAFA;
+  }
+
+  p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.event-list {
+  margin: .75rem;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+
+  .event-item {
+    display: flex;
+    padding: .5rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+
+    &:hover {
+      background: #fcfcfc;
+
+      & .event-name {
+        font-style: italic;
+      }
+
+      & .control {
+        display: block;
+      }
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  .control {
+    display: none;
+    margin-left: .5rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: .2rem;
+    margin-left: .25rem;
+  }
+
+  .badge {
+    display: block;
+    font-size: .75rem;
+    width: 2rem;
+    margin-right: .5rem;
+    padding: .2rem;
+    text-align: center;
+  }
+
+  .event-name {
+    p {
+      padding: .2rem;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
