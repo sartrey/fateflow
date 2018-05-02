@@ -6,7 +6,15 @@ const config = require('../../../kernel/config.js')
 const SOURCES = {
   created: false,
   context: null,
-  defines: {}
+  defines: {},
+  handler: {
+    softError
+  }
+}
+
+function softError(error) {
+  console.log(error)
+  throw new Error('mysql error')
 }
 
 /**

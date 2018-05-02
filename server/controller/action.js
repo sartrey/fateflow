@@ -14,7 +14,7 @@ function loadAction(name) {
 
 async function callAction() {
   var proxyId = this.params.proxyId
-  var reply = assist.getJSON(false, 'unknown')
+  var reply = assist.getJSON(false)
   try {
     var action = loadAction(proxyId)
   } catch (error) {
@@ -25,7 +25,9 @@ async function callAction() {
   } catch (error) {
     reply.error = error.message
   }
-  reply = assist.getJSON(true, result)
+  if (! reply.error) {
+    reply = assist.getJSON(true, result)
+  }
   return this.epii.json(reply)
 }
 

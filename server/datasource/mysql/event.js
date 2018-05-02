@@ -7,13 +7,6 @@ module.exports = function (database) {
 
     // table schema
     {
-      // id = event id
-      id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true
-      },
-
       // parent = parent event id
       parent: {
         type: Sequelize.INTEGER,

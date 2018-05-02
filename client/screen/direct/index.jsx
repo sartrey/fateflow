@@ -25,6 +25,18 @@ export default class extends Component {
   componentDidMount() {
     // load current event
     // load all sub-events
+    this.loadEvents()
+  }
+
+  loadEvents() {
+    return fetch('/api/loadEvents')
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          return console.error(json.error)
+        }
+        this.setState({ items: json.model })
+      })
   }
 
   getEventIntent() {

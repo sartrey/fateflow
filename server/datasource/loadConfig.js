@@ -14,7 +14,7 @@ const SIMPLE_DEPLOY = {
   }
 }
 
-async function getDeployConfig() {
+async function loadConfig() {
   try {
     return await config.handle.getDeployConfig()
   } catch (error) {
@@ -22,4 +22,4 @@ async function getDeployConfig() {
   }
 }
 
-module.exports = getDeployConfig
+module.exports = loadConfig

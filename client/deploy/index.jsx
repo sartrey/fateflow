@@ -9,7 +9,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/getDeployConfig')
+    fetch('/api/loadConfig')
     .then(response => response.json())
     .then(json => {
       this.setState({ input: JSON.stringify(json.model, null, 2) })
@@ -28,7 +28,7 @@ export default class extends Component {
       console.error(error)
       return alert('input error')
     }
-    fetch('/api/setDeployConfig', {
+    fetch('/api/saveConfig', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

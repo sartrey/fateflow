@@ -5,7 +5,7 @@ module.exports = [
     body: async function () {
       var query = this.query
       var state = { query }
-      return this.epii.view('/system/createEvent', state)
+      return this.epii.view('/system/editEvent', state)
     }
   }
 ]
