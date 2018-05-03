@@ -378,6 +378,13 @@ header .mode > div.active {
 footer {
 }
 
+.no-data {
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: #999;
+}
+
 .alert {
   position: relative;
   margin: .5rem;
@@ -510,7 +517,7 @@ footer {
 .event-list .badge {
     display: block;
     font-size: .75rem;
-    width: 2rem;
+    min-width: 2rem;
     margin-right: .5rem;
     padding: .2rem;
     text-align: center;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import 'whatwg-fetch'
 import Layout from '../../component/frame/Layout'
+import { joinQuery } from '../../component/script/url'
 
 export default class extends Component {
   constructor(props) {
@@ -8,15 +9,16 @@ export default class extends Component {
     const state = window.epii.state
     this.state = {
       query: state.query,
+      model: null,
       items: [
-        { id: 0, title: 'test1', status: 0 },
-        { id: 1, title: 'test2', status: 1 },
-        { id: 2, title: 'test3', status: 2 },
-        { id: 3, title: 'test4'.repeat(40), status: 3 },
-        { id: 4, title: 'test1', status: 0 },
-        { id: 5, title: 'test2', status: 1 },
-        { id: 6, title: 'test3', status: 2 },
-        { id: 7, title: 'test4'.repeat(40), status: 3 },
+        // { id: 0, title: 'test1', status: 0 },
+        // { id: 1, title: 'test2', status: 1 },
+        // { id: 2, title: 'test3', status: 2 },
+        // { id: 3, title: 'test4'.repeat(40), status: 3 },
+        // { id: 4, title: 'test1', status: 0 },
+        // { id: 5, title: 'test2', status: 1 },
+        // { id: 6, title: 'test3', status: 2 },
+        // { id: 7, title: 'test4'.repeat(40), status: 3 },
       ],
       modal: null
     }
@@ -25,11 +27,25 @@ export default class extends Component {
   componentDidMount() {
     // load current event
     // load all sub-events
-    this.loadEvents()
+    this.loadMainEvent()
+    this.loadNextEvents()
   }
 
-  loadEvents() {
-    return fetch('/api/loadEvents')
+  loadMainEvent() {
+    const { query } = this.state
+    return fetch(`/api/loadEvent?${joinQuery({ id: query.eventId })}`)
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          return console.error(json.error)
+        }
+        this.setState({ model: json.model })
+      })
+  }
+
+  loadNextEvents() {
+    const { query } = this.state
+    return fetch(`/api/loadEvents?${joinQuery({ parent: query.eventId })}`)
       .then(response => response.json())
       .then(json => {
         if (json.error) {
@@ -65,13 +81,31 @@ export default class extends Component {
     )
   }
 
+  getProgress() {
+    const { items, model } = this.state
+    const total = items.length
+    const count = items.reduce((prev, item) => {
+      return prev + (item.status < 2 ? 1 : 0)
+    }, 0)
+    if (total > 0) return count / total * 100
+    if (! model) return 0
+    return model.status < 2 ? 100 : 0
+  }
+
+  navigateToPrev(e) {
+    e.preventDefault()
+    const { model } = this.state
+    if (! model) return
+    location.href = `/direct/${model.parent < 0 ? '' : model.parent}`
+  }
+
   render() {
-    const { query, items } = this.state
+    const { query, model, items } = this.state
     return (
       <Layout>
         <div className='card'>
           <div>
-            <a className='btn'>
+            <a className='btn' onClick={e => this.navigateToPrev(e)}>
               <i className='md-icons'>arrow_back</i>
             </a>
             <a className='btn' target='_blank'
@@ -80,10 +114,12 @@ export default class extends Component {
             </a>
           </div>
           <div className='event-stat'>
-            <a className='badge area-idle'>80.00%</a>
+            <a className='badge area-idle'>
+              { this.getProgress().toFixed(2) + '%' }
+            </a>
           </div>
           <div className='event-name'>
-            <p>TODO TODOTODOTODOTODOTODOTODOTODOTOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO</p>
+            <p>{ model && model.title }</p>
           </div>
         </div>
         <div className='card'>
@@ -95,7 +131,10 @@ export default class extends Component {
           </div>
         </div>
         <div className='event-list'>
-          {items.map(item => this.renderEventItem(item))}
+          { items.map(item => this.renderEventItem(item)) }
+          { items.length === 0 && (
+            <div className='no-data'>no data</div>
+          ) }
         </div>
       </Layout>
     )
