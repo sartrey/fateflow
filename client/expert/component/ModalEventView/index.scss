@@ -1,0 +1,20 @@
+.modal-event-view {
+  .card {
+    flex-direction: column;
+  }
+
+  .group-flag {
+    display: flex;
+    flex-direction: row;
+    margin: .75rem;
+
+    .btn-large {
+      flex: 1;
+      margin-right: .75rem;
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+  }
+}

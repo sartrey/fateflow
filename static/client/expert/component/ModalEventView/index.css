@@ -1,0 +1,15 @@
+.modal-event-view .card {
+    flex-direction: column;
+  }
+  .modal-event-view .group-flag {
+    display: flex;
+    flex-direction: row;
+    margin: .75rem;
+  }
+  .modal-event-view .group-flag .btn-large {
+      flex: 1;
+      margin-right: .75rem
+    }
+  .modal-event-view .group-flag .btn-large:last-of-type {
+    margin: 0;
+}

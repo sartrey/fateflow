@@ -1,0 +1,105 @@
+@import "../theme.scss";
+@import "../frame.scss";
+@import "./component/ModalEventEdit/index.scss";
+@import "./component/ModalEventView/index.scss";
+
+.card {
+  &.event-head {
+    padding: .5rem;
+  }
+
+  .event-name {
+    box-sizing: border-box;
+    border: 1px dashed #eee;
+
+    p {
+      padding: .5rem;
+    }
+  }
+
+  .group-view {
+    display: flex;
+
+    input {
+      width: 10rem;
+      height: 100%;
+      padding: 5px .5rem;
+      border-width: 2px;
+      border-style: solid;
+      margin-right: .5rem;
+    }
+  }
+}
+
+.event-name {
+  overflow: auto;
+  flex: 1;
+
+  &:hover {
+    background: #FAFAFA;
+  }
+
+  p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.event-list {
+  margin: .75rem;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+
+  .event-item {
+    display: flex;
+    padding: .5rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+
+    &:hover {
+      background: #fcfcfc;
+
+      & .event-name {
+        font-style: italic;
+      }
+
+      & .control {
+        display: block;
+      }
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  .control {
+    display: none;
+    margin-left: .5rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: .2rem;
+    margin-left: .25rem;
+  }
+
+  .badge {
+    display: block;
+    font-size: .75rem;
+    min-width: 2rem;
+    margin-right: .5rem;
+    padding: .2rem;
+    text-align: center;
+  }
+
+  .event-name {
+    p {
+      padding: .2rem;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}

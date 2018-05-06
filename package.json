@@ -1,10 +1,15 @@
 {
   "name": "timeaxis",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "a simple time management tool",
   "main": "index.js",
+  "bin": {
+    "timeaxis": "bin/timeaxis"
+  },
   "scripts": {
-    "test": "test"
+    "dev": "NODE_ENV=development node index.js",
+    "make": "NODE_ENV=production node build.js",
+    "test": "node test"
   },
   "repository": {
     "type": "git",
@@ -13,12 +18,21 @@
   "keywords": [
     "time",
     "tick",
-    "task"
+    "task",
+    "event"
   ],
   "author": "Sartrey Lee",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sartrey/timeaxis/issues"
   },
-  "homepage": "https://github.com/sartrey/timeaxis#readme"
+  "homepage": "https://github.com/sartrey/timeaxis#readme",
+  "dependencies": {
+    "epii-server": "^0.3.2",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.6"
+  },
+  "devDependencies": {
+    "epii-render": "^0.6.2"
+  }
 }

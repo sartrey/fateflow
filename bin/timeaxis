@@ -1,0 +1,100 @@
+#!/usr/bin/env node
+
+'use strict'
+
+const fs = require('fs')
+const os = require('os')
+const path = require('path')
+const spawn = require('child_process').spawn
+const fetch = require('node-fetch')
+
+const homedir = os.homedir()
+const maindir = path.join(homedir, '.timeaxis')
+
+process.on('unhandledRejection', function (reason) {
+  console.error(
+    'unhandled rejection',
+    reason && (reason.stack || reason.toString())
+  )
+})
+
+function parseCommand(args, keys) {
+  var command = ''
+  var regexps = keys.map(key => new RegExp(`^-?${key[0]}`, 'i'))
+  args.forEach(arg => {
+    var index = regexps.findIndex(e => e.test(arg))
+    if (index >= 0) command = keys[index]
+  })
+  return command
+}
+
+function parseOptions(args, keys) {
+  var options = {}
+  var regexps = keys.map(key => new RegExp(`^--${key}=?`))
+  args.forEach(arg => {
+    var index = regexps.findIndex(e => e.test(arg))
+    if (index >= 0) {
+      var value = arg.replace(regexps[index], '')
+      options[keys[index]] = value || 'true'
+    }
+  })
+  return options
+}
+
+function showHelp() {
+  var guidePath = path.join(__dirname, 'guide.txt')
+  var guideText = fs.readFileSync(guidePath, 'utf8')
+  console.log(guideText)
+}
+
+function forkSelf() {
+  var cwd = process.cwd()
+  var argv = process.argv.filter(e => e !== '--fork')
+  var logFd = fs.openSync(path.join(maindir, 'log'), 'a')
+  var proc = spawn(argv[0], argv.slice(1), { 
+    cwd, detached: true, stdio: ['ignore', logFd, logFd]
+  })
+  console.log(`\n  timeaxis - fork <${argv.slice(2).join(' ')}> at ${proc.pid}`)
+  var timeout = setTimeout(function () {
+    console.log(`  timeaxis - fork done\n`)
+    proc.unref()
+    process.exit(0)
+  }, 1500)
+  proc.on('exit', function (code) {
+    if (code) console.log(`  timeaxis - fork error code => ${code}\n`)
+    clearTimeout(timeout)
+    process.exit(code)
+  })
+}
+
+function stopSelf() {
+  var portFile = path.join(maindir, 'port')
+  try {
+    var port = fs.readFileSync(portFile, 'utf8')
+    fetch(`http://localhost:${port}/api/stopServer`)
+    .then(response => response.json())
+    .then(json => {
+      console.log('\n  timeaxis - server stopped\n')
+    })
+    .catch(error => {
+      console.log('\n  timeaxis - server is not running\n')
+    })
+  } catch (error) {
+    console.log('\n  timeaxis - server still running ? @_@ \n')
+  }
+}
+
+(function main() {
+  var cwd = process.cwd()
+  var command = parseCommand(process.argv, ['help', 'stop'])
+  var options = parseOptions(process.argv, ['port', 'fork'])
+
+  if (command === 'help') return showHelp()
+  if (command === 'stop') return stopSelf()
+
+  if (options.fork) return forkSelf()
+  // require('../')({
+  //   port: options.port
+  // })
+  require('../')
+})()
