@@ -1,0 +1,15 @@
+  
+  timeaxis [command] [options]
+  
+  example
+  
+    timeaxis -d
+    timeaxis -d --fork
+    timeaxis --port=8080
+    timeaxis stop
+    timeaxis help
+
+  default
+  
+    non-fork mode at 9988
+  

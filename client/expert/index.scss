@@ -4,7 +4,14 @@
 @import "./component/ModalEventView/index.scss";
 
 .card {
+  &.event-head {
+    padding: .5rem;
+  }
+
   .event-name {
+    box-sizing: border-box;
+    border: 1px dashed #eee;
+
     p {
       padding: .5rem;
     }

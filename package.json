@@ -1,6 +1,6 @@
 {
   "name": "timeaxis",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "a simple time management tool",
   "main": "index.js",
   "bin": {
@@ -18,7 +18,8 @@
   "keywords": [
     "time",
     "tick",
-    "task"
+    "task",
+    "event"
   ],
   "author": "Sartrey Lee",
   "license": "MIT",

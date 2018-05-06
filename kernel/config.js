@@ -5,7 +5,7 @@ const assist = require('./assist.js')
 const DEPLOY_ROOT = path.join(os.homedir(), '.timeaxis')
 const CONFIG = {
   name: 'timeaxis',
-  port: 8080,
+  port: 9988,
   path: {
     root: path.join(__dirname, '../'),
     deploy: DEPLOY_ROOT,

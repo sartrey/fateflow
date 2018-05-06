@@ -119,7 +119,7 @@ export default class extends Component {
     const { query, model, items, modal } = this.state
     return (
       <Layout>
-        <div className='card'>
+        <div className='card event-head'>
           <div>
             <a className='btn' onClick={e => this.navigateToPrev(e)}>
               <i className='md-icons'>arrow_back</i>

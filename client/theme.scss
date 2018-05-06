@@ -53,10 +53,10 @@ input {
   box-sizing: border-box;
   font-size: 1rem;
   display: block;
+  border-color: #ccc;
   border-radius: 1px;
   outline: none;
   transition: .2s;
-  border-color: #ccc;
 
   &:hover {
     border-color: #aaa;
@@ -96,17 +96,25 @@ input {
 }
 
 .field {
-  margin: 0 0 .5rem 0;
+  margin: 0 0 .75rem 0;
+
+  &:last-of-type {
+    margin-bottom: 0;
+
+    label.label-more {
+      margin-bottom: 0;
+    }
+  }
 
   label {
     display: block;
 
     &.label-head {
-      margin-bottom: .5rem;
+      margin-bottom: .75rem;
     }
 
     &.label-more {
-      margin-bottom: .5rem;
+      margin-bottom: .75rem;
     }
   }
 
@@ -213,7 +221,7 @@ input {
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
-    width: 60%;
+    width: 50%;
     min-width: 36rem;
     max-width: 50rem;
     overflow: hidden;
@@ -346,7 +354,7 @@ input {
 .card {
   display: flex;
   margin: .75rem;
-  padding: .5rem;
+  padding: .75rem;
   border-radius: 1px;
   background: #fff;
   box-shadow: 0 0 2px rgba(0,0,0,0.3);
