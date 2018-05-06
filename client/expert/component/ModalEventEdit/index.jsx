@@ -48,7 +48,7 @@ export default class ModalEventEdit extends Component {
   render() {
     const { model, onClose } = this.props
     return (
-      <Modal name='event-info' title='event' onClose={onClose}>
+      <Modal name='event-edit' title='event' onClose={onClose}>
         <div className='card'>
           <p>parent event - {model ? model.title : '(nil)'}</p>
         </div>

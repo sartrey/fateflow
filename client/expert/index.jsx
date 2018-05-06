@@ -3,6 +3,7 @@ import 'whatwg-fetch'
 import Layout from '../component/frame/Layout'
 import { joinQuery } from '../component/script/url'
 import ModalEventEdit from './component/ModalEventEdit'
+import ModalEventView from './component/ModalEventView'
 
 export default class extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export default class extends Component {
 
   loadMainEvent() {
     const { query } = this.state
+    if (query.eventId == null) return
     return fetch(`/api/loadEvent?${joinQuery({ id: query.eventId })}`)
       .then(response => response.json())
       .then(json => {
@@ -63,8 +65,8 @@ export default class extends Component {
     // view - edit - make
   }
 
-  openModal(name) {
-    this.setState({ modal: name })
+  openModal(name, data) {
+    this.setState({ modal: { name, data } })
   }
 
   closeModal(e) {
@@ -81,7 +83,7 @@ export default class extends Component {
         <div><a className={'badge area-stroke area-' + status}>{status}</a></div>
         <div className='event-name'><p>{item.title}</p></div>
         <div className='control'>
-          <a className='btn'>
+          <a className='btn' onClick={e => this.openModal('event-view', { model: item })}>
             <i className='md-icons'>info_outline</i>
           </a>
           <a className='btn'>
@@ -122,7 +124,7 @@ export default class extends Component {
             <a className='btn' onClick={e => this.navigateToPrev(e)}>
               <i className='md-icons'>arrow_back</i>
             </a>
-            <a className='btn' onClick={e => this.openModal('event-edit')}>
+            <a className='btn' onClick={e => this.openModal('event-edit', { model })}>
               <i className='md-icons'>add</i>
             </a>
           </div>
@@ -145,8 +147,11 @@ export default class extends Component {
             <div className='no-data'>no data</div>
           ) }
         </div>
-        { modal === 'event-edit' && (
-          <ModalEventEdit model={model} onClose={e => this.closeModal(e)} />
+        { modal && modal.name === 'event-edit' && (
+          <ModalEventEdit {...modal.data} onClose={e => this.closeModal(e)} />
+        ) }
+        { modal && modal.name === 'event-view' && (
+          <ModalEventView {...modal.data} onClose={e => this.closeModal(e)} />
         ) }
       </Layout>
     )

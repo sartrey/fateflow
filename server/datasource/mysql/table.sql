@@ -6,7 +6,6 @@ CREATE TABLE `timeaxis_event` (
   `elapse` int(11) NOT NULL,
   `title` varchar(512) NOT NULL DEFAULT '',
   `content` text,
-  `sprint` varchar(512) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `deleted_at` datetime NOT NULL,

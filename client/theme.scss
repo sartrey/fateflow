@@ -168,6 +168,7 @@ input {
     }
   
     &:active {
+      color: #fff;
       background: #039BE5;
     }  
   }
@@ -179,7 +180,20 @@ input {
     }
   
     &:active {
+      color: #fff;
       background: #43A047;
+    }  
+  }
+
+  &.area-halt {
+    &:hover {
+      color: #fff;
+      background: #F44336;
+    }
+  
+    &:active {
+      color: #fff;
+      background: #E53935;
     }  
   }
 }

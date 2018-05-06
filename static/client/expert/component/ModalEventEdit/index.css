@@ -1,6 +1,6 @@
-.modal-event-info .btn-large {
+.modal-event-edit .btn-large {
     margin: .75rem;
   }
-  .modal-event-info form {
+  .modal-event-edit form {
     flex: 1;
   }

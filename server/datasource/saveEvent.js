@@ -18,7 +18,6 @@ async function saveEvent(query, input) {
     })
     return model.save().then(() => model)
   }
-  console.log(result)
 }
 
 module.exports = saveEvent

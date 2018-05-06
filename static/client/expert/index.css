@@ -168,6 +168,7 @@ input:focus {
 }
 
 .btn.area-idle:active {
+  color: #fff;
   background: #039BE5;
 }
 
@@ -177,7 +178,18 @@ input:focus {
 }
 
 .btn.area-done:active {
+  color: #fff;
   background: #43A047;
+}
+
+.btn.area-halt:hover {
+  color: #fff;
+  background: #F44336;
+}
+
+.btn.area-halt:active {
+  color: #fff;
+  background: #E53935;
 }
 
 .modal {
@@ -430,13 +442,32 @@ header .more > a {
 footer {
 }
 
-.modal-event-info .btn-large {
+.modal-event-edit .btn-large {
     margin: .75rem;
   }
 
-.modal-event-info form {
+.modal-event-edit form {
     flex: 1;
   }
+
+.modal-event-view .card {
+    flex-direction: column;
+  }
+
+.modal-event-view .group-flag {
+    display: flex;
+    flex-direction: row;
+    margin: .75rem;
+  }
+
+.modal-event-view .group-flag .btn-large {
+      flex: 1;
+      margin-right: .75rem
+    }
+
+.modal-event-view .group-flag .btn-large:last-of-type {
+  margin: 0;
+}
 
 .card .event-name p {
       padding: .5rem;
