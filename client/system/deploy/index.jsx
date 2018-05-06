@@ -48,7 +48,7 @@ export default class extends Component {
     var { input } = this.state
     return (
       <div>
-        <p>/admin/deploy</p>
+        <p>/system/deploy</p>
         <textarea value={input} onChange={e => this.handleChange(e)} />
         <button onClick={e => this.handleCommit()}>save</button>
       </div>

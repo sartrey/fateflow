@@ -49,6 +49,65 @@ body {
   background: #EEEEEE;
 }
 
+.no-data {
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: #999;
+}
+
+.alert {
+  position: relative;
+  margin: .5rem;
+  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+.alert > .wrapper {
+    padding: 1rem;
+  }
+
+.alert > .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    display: block;
+    padding: 1rem;
+    line-height: 1rem;
+    cursor: pointer;
+  }
+
+.modal .wrapper {
+    width: 36rem;
+  }
+
+.modal .header {
+    display: flex;
+    padding: .75rem;
+    font-size: 1.2rem;
+  }
+
+.modal .header .title {
+      flex: 1;
+    }
+
+.modal .header .right {
+      flex: 2rem 0;
+      text-align: right;
+    }
+
+.modal .header .right a {
+        cursor: pointer;
+      }
+
+.modal .content {
+    padding: 1px 0;
+  }
+
+.modal .footer .btn-lg {
+      padding: .6rem;
+    }
+
 .field {
   margin: .5rem .5rem 1rem .5rem;
 }
@@ -335,27 +394,16 @@ header .logo {
     text-align: left;
   }
 
-header .mode {
-    display: flex;
-    justify-content: flex-end;
-    user-select: none;
+header .more {
+    text-align: right;
+    transition: .3s;
   }
 
-header .mode > div {
-      padding: .5rem 1rem;
-      border: 1px solid #B3E5FC;
+header .more > a {
+      font-size: 1.5rem;
+      color: #B3E5FC;
       cursor: pointer;
-      transition: .3s
     }
-
-header .mode > div:hover {
-  background: #616161;
-}
-
-header .mode > div.active {
-  color: #424242;
-  background: #B3E5FC;
-}
 
 .holder {
   flex: 1;
@@ -377,62 +425,3 @@ header .mode > div.active {
 
 footer {
 }
-
-.no-data {
-  font-size: 1.2rem;
-  padding: 1.5rem;
-  text-align: center;
-  color: #999;
-}
-
-.alert {
-  position: relative;
-  margin: .5rem;
-  box-shadow: 0 0 3px rgba(0,0,0,0.5);
-}
-
-.alert > .wrapper {
-    padding: 1rem;
-  }
-
-.alert > .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    text-align: right;
-    display: block;
-    padding: 1rem;
-    line-height: 1rem;
-    cursor: pointer;
-  }
-
-.modal .wrapper {
-    width: 36rem;
-  }
-
-.modal .header {
-    display: flex;
-    padding: .75rem;
-    font-size: 1.2rem;
-  }
-
-.modal .header .title {
-      flex: 1;
-    }
-
-.modal .header .right {
-      flex: 2rem 0;
-      text-align: right;
-    }
-
-.modal .header .right a {
-        cursor: pointer;
-      }
-
-.modal .content {
-    padding: 1px 0;
-  }
-
-.modal .footer .btn-lg {
-      padding: .6rem;
-    }

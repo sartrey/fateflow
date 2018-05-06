@@ -1,11 +1,25 @@
 module.exports = [
   {
-    path: '/event/create',
+    path: '/',
     verb: 'get',
     body: async function () {
-      var query = this.query
-      var state = { query }
-      return this.epii.view('/system/editEvent', state)
+      return this.epii.view('/system/launch')
+    }
+  },
+  
+  {
+    path: '/system/launch',
+    verb: 'get',
+    body: async function () {
+      return this.epii.view('/system/launch')
+    }
+  },
+
+  {
+    path: '/system/deploy',
+    verb: 'get',
+    body: async function () {
+      return this.epii.view('/system/deploy')
     }
   }
 ]

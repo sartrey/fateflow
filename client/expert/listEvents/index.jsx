@@ -73,8 +73,8 @@ export default class extends Component {
           <a className='btn'>
             <i className='md-icons'>link</i>
           </a>
-          <a className='btn' href={`/direct/${item.id}`}>
-            <i className='md-icons'>expand_more</i>
+          <a className='btn' href={`/events/${item.id}`}>
+            <i className='md-icons'>open_in_new</i>
           </a>
         </div>
       </div>
@@ -96,7 +96,7 @@ export default class extends Component {
     e.preventDefault()
     const { model } = this.state
     if (! model) return
-    location.href = `/direct/${model.parent < 0 ? '' : model.parent}`
+    location.href = `/events/${model.parent < 0 ? '' : model.parent}`
   }
 
   render() {
@@ -118,16 +118,14 @@ export default class extends Component {
               { this.getProgress().toFixed(2) + '%' }
             </a>
           </div>
-          <div className='event-name'>
-            <p>{ model && model.title }</p>
-          </div>
-        </div>
-        <div className='card'>
           <div>
             <input type='text' />
           </div>
           <div>
             <a className='btn'>Sort By</a>
+          </div>
+          <div className='event-name'>
+            <p>{ model && model.title }</p>
           </div>
         </div>
         <div className='event-list'>

@@ -49,6 +49,69 @@ body {
   background: #EEEEEE;
 }
 
+.no-data {
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: #999;
+}
+
+.alert {
+  position: relative;
+  margin: .5rem;
+  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+
+  > .wrapper {
+    padding: 1rem;
+  }
+
+  > .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    display: block;
+    padding: 1rem;
+    line-height: 1rem;
+    cursor: pointer;
+  }
+}
+
+.modal {
+  .wrapper {
+    width: 36rem;
+  }
+
+  .header {
+    display: flex;
+    padding: .75rem;
+    font-size: 1.2rem;
+
+    .title {
+      flex: 1;
+    }
+
+    .right {
+      flex: 2rem 0;
+      text-align: right;
+
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .content {
+    padding: 1px 0;
+  }
+
+  .footer {
+    .btn-lg {
+      padding: .6rem;
+    }
+  }
+}
+
 .field {
   margin: .5rem .5rem 1rem .5rem;
 

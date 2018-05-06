@@ -43,12 +43,6 @@ module.exports = function (database) {
       content: {
         type: Sequelize.TEXT('LONG'),
         allowNull: true
-      },
-
-      // sprint = sprint name
-      sprint: {
-        type: Sequelize.STRING(512),
-        allowNull: true
       }
     },
 
