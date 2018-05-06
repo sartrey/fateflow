@@ -1,28 +1,21 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import 'whatwg-fetch'
-import Layout from '../../component/frame/Layout'
-import Field from '../../component/Field'
+import Modal from '../../../component/Modal'
+import Field from '../../../component/Field'
 
-export default class extends Component {
+export default class ModalEventEdit extends Component {
   constructor(props) {
     super(props)
-    const state = window.epii.state
     this.state = {
-      query: state.query,
-      modal: null,
       input: {}
     }
   }
 
-  componentDidMount() {
-    this.loadEvent();
-  }
-
-  loadEvent() {
-  }
-
   saveEvent() {
+    const { model } = this.props
     const { input } = this.state
+    input.parent = model.id
     fetch('/api/saveEvent', {
       method: 'POST',
       headers: {
@@ -33,13 +26,16 @@ export default class extends Component {
     .then(response => response.json())
     .then(json => {
       if (json.state) {
-        window.location.href = '/direct'
+        const { onClose } = this.props
+        if (onClose) {
+          onClose({ changed: true })
+        }
       } else {
-        alert(json.error)
+        console.error(json.error)
       }
     })
     .catch(error => {
-      alert(error.message)
+      console.error(error.message)
     })
   }
 
@@ -50,10 +46,11 @@ export default class extends Component {
   }
 
   render() {
-    const { query } = this.state
+    const { model, onClose } = this.props
     return (
-      <Layout hideMode={true}>
+      <Modal name='event-info' title='event' onClose={onClose}>
         <div className='card'>
+          <p>parent event - {model ? model.title : '(nil)'}</p>
         </div>
         <div className='card'>
           <form>
@@ -65,10 +62,16 @@ export default class extends Component {
               onChange={value => this.changeInput('expect', value)} />
           </form>
         </div>
-        <a className='btn fixed-btn area-done' onClick={e => this.saveEvent()}>
+        <a className='btn btn-large area-done' onClick={e => this.saveEvent()}>
           <i className='md-icons'>done</i>
+          <span>save event</span>
         </a>
-      </Layout>
+      </Modal>
     )
   }
+}
+
+ModalEventEdit.propTypes = {
+  model: PropTypes.object,
+  onClose: PropTypes.func
 }

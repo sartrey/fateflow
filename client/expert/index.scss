@@ -1,5 +1,6 @@
-@import "../../theme.scss";
-@import "../../frame.scss";
+@import "../theme.scss";
+@import "../frame.scss";
+@import "./component/ModalEventEdit/index.scss";
 
 .card {
   .event-name {
@@ -8,22 +9,16 @@
     }
   }
 
-  input {
-    box-sizing: border-box;
-    font-size: 1rem;
-    display: block;
-    height: 100%;
-    padding: 5px .5rem;
-    border: 2px solid #ccc;
-    border-radius: 1px;
-    outline: none;
+  .group-view {
+    display: flex;
 
-    &:hover {
-      border-color: #aaa;
-    }
-
-    &:focus {
-      border-color: #666;
+    input {
+      width: 10rem;
+      height: 100%;
+      padding: 5px .5rem;
+      border-width: 2px;
+      border-style: solid;
+      margin-right: .5rem;
     }
   }
 }

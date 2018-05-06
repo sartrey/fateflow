@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import 'whatwg-fetch'
-import Layout from '../../component/frame/Layout'
-import { joinQuery } from '../../component/script/url'
+import Layout from '../component/frame/Layout'
+import { joinQuery } from '../component/script/url'
+import ModalEventEdit from './component/ModalEventEdit'
 
 export default class extends Component {
   constructor(props) {
@@ -45,7 +46,9 @@ export default class extends Component {
 
   loadNextEvents() {
     const { query } = this.state
-    return fetch(`/api/loadEvents?${joinQuery({ parent: query.eventId })}`)
+    return fetch(`/api/loadEvents?${joinQuery({ 
+      parent: query.eventId || '-1' 
+    })}`)
       .then(response => response.json())
       .then(json => {
         if (json.error) {
@@ -58,6 +61,17 @@ export default class extends Component {
   getEventIntent() {
     // todo - /event/:id/:action
     // view - edit - make
+  }
+
+  openModal(name) {
+    this.setState({ modal: name })
+  }
+
+  closeModal(e) {
+    this.setState({ modal: null })
+    if (e && e.changed) {
+      this.loadNextEvents()
+    }
   }
 
   renderEventItem(item) {
@@ -100,7 +114,7 @@ export default class extends Component {
   }
 
   render() {
-    const { query, model, items } = this.state
+    const { query, model, items, modal } = this.state
     return (
       <Layout>
         <div className='card'>
@@ -108,8 +122,7 @@ export default class extends Component {
             <a className='btn' onClick={e => this.navigateToPrev(e)}>
               <i className='md-icons'>arrow_back</i>
             </a>
-            <a className='btn' target='_blank'
-              href={`/event/create?parent=${query.eventId || 'nil'}`}>
+            <a className='btn' onClick={e => this.openModal('event-edit')}>
               <i className='md-icons'>add</i>
             </a>
           </div>
@@ -118,10 +131,8 @@ export default class extends Component {
               { this.getProgress().toFixed(2) + '%' }
             </a>
           </div>
-          <div>
+          <div className='group-view'>
             <input type='text' />
-          </div>
-          <div>
             <a className='btn'>Sort By</a>
           </div>
           <div className='event-name'>
@@ -134,6 +145,9 @@ export default class extends Component {
             <div className='no-data'>no data</div>
           ) }
         </div>
+        { modal === 'event-edit' && (
+          <ModalEventEdit model={model} onClose={e => this.closeModal(e)} />
+        ) }
       </Layout>
     )
   }
