@@ -4,3 +4,6 @@
   .modal-event-edit form {
     flex: 1;
   }
+  .modal-event-edit form textarea {
+      resize: none;
+    }

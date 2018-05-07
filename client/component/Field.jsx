@@ -6,18 +6,12 @@ export default class Field extends Component {
     super()
   }
 
-  handleChange(e) {
-    const { onChange } = this.props
-    const value = e.target.value
-    if (onChange) onChange(value)
-  }
-
   render() {
     const { label, theme } = this.props
     return (
       <div className={`field field-${theme}`}>
         <label className='label-head'>{label}</label>
-        <input onChange={e => this.handleChange(e)} />
+        { this.props.children }
         <label className='label-more'></label>
       </div>
     )

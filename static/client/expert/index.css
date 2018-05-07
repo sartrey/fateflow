@@ -49,7 +49,7 @@ body {
   background: #EEEEEE;
 }
 
-input {
+input, textarea {
   box-sizing: border-box;
   font-size: 1rem;
   display: block;
@@ -59,11 +59,11 @@ input {
   transition: .2s
 }
 
-input:hover {
+input:hover, textarea:hover {
   border-color: #aaa;
 }
 
-input:focus {
+input:focus, textarea:focus {
   border-color: #666;
 }
 
@@ -119,17 +119,17 @@ input:focus {
   margin-bottom: .75rem;
 }
 
-.field input {
+.field input, .field textarea {
     width: 100%;
     padding: .3rem;
     border: 1px solid #ccc;
 }
 
-.field input:hover {
+.field input:hover, .field textarea:hover {
   border-color: #aaa;
 }
 
-.field input:focus {
+.field input:focus, .field textarea:focus {
   border-color: #666;
 }
 
@@ -458,6 +458,10 @@ footer {
     flex: 1;
   }
 
+.modal-event-edit form textarea {
+      resize: none;
+    }
+
 .modal-event-view .card {
     flex-direction: column;
   }
@@ -477,16 +481,31 @@ footer {
   margin: 0;
 }
 
+.event-title {
+  overflow: auto;
+  flex: 1
+}
+
+.event-title:hover {
+  background: #FAFAFA;
+}
+
+.event-title p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .card.event-head {
   padding: .5rem;
 }
 
-.card .event-name {
+.card .event-title {
     box-sizing: border-box;
     border: 1px dashed #eee;
 }
 
-.card .event-name p {
+.card .event-title p {
       padding: .5rem;
     }
 
@@ -502,21 +521,6 @@ footer {
       border-style: solid;
       margin-right: .5rem;
     }
-
-.event-name {
-  overflow: auto;
-  flex: 1
-}
-
-.event-name:hover {
-  background: #FAFAFA;
-}
-
-.event-name p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
 
 .event-list {
   margin: .75rem;
@@ -559,17 +563,26 @@ footer {
 
 .event-list .badge {
     display: block;
+    box-sizing: border-box;
     font-size: .75rem;
-    min-width: 2rem;
+    height: 100%;
     margin-right: .5rem;
-    padding: .2rem;
+    padding: .2rem .5rem;
     text-align: center;
   }
 
-.event-list .event-name p {
+.event-list .event-status .badge {
       padding: .2rem;
     }
 
-.event-list .event-name:hover {
+.event-list .event-expire .badge {
+      margin-right: 0;
+    }
+
+.event-list .event-title p {
+      padding: .2rem;
+    }
+
+.event-list .event-title:hover {
   background: transparent;
 }

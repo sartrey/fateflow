@@ -22,7 +22,7 @@ module.exports = function (database) {
       },
 
       // expect = expected time by minutes
-      // 1 day = 1440 min
+      // 1 day = 1440 minutes
       expect: {
         type: Sequelize.INTEGER,
       },

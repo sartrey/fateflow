@@ -3,12 +3,27 @@
 @import "./component/ModalEventEdit/index.scss";
 @import "./component/ModalEventView/index.scss";
 
+.event-title {
+  overflow: auto;
+  flex: 1;
+
+  &:hover {
+    background: #FAFAFA;
+  }
+
+  p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 .card {
   &.event-head {
     padding: .5rem;
   }
 
-  .event-name {
+  .event-title {
     box-sizing: border-box;
     border: 1px dashed #eee;
 
@@ -28,21 +43,6 @@
       border-style: solid;
       margin-right: .5rem;
     }
-  }
-}
-
-.event-name {
-  overflow: auto;
-  flex: 1;
-
-  &:hover {
-    background: #FAFAFA;
-  }
-
-  p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
   }
 }
 
@@ -86,14 +86,27 @@
 
   .badge {
     display: block;
+    box-sizing: border-box;
     font-size: .75rem;
-    min-width: 2rem;
+    height: 100%;
     margin-right: .5rem;
-    padding: .2rem;
+    padding: .2rem .5rem;
     text-align: center;
   }
 
-  .event-name {
+  .event-status {
+    .badge {
+      padding: .2rem;
+    }
+  }
+
+  .event-expire {
+    .badge {
+      margin-right: 0;
+    }
+  }
+
+  .event-title {
     p {
       padding: .2rem;
     }

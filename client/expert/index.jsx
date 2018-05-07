@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import 'whatwg-fetch'
 import Layout from '../component/frame/Layout'
-import { joinQuery } from '../component/script/url'
 import ModalEventEdit from './component/ModalEventEdit'
 import ModalEventView from './component/ModalEventView'
+import { joinQuery, humanDuration } from '../component/script/utility'
 
 export default class extends Component {
   constructor(props) {
@@ -12,16 +12,7 @@ export default class extends Component {
     this.state = {
       query: state.query,
       model: null,
-      items: [
-        // { id: 0, title: 'test1', status: 0 },
-        // { id: 1, title: 'test2', status: 1 },
-        // { id: 2, title: 'test3', status: 2 },
-        // { id: 3, title: 'test4'.repeat(40), status: 3 },
-        // { id: 4, title: 'test1', status: 0 },
-        // { id: 5, title: 'test2', status: 1 },
-        // { id: 6, title: 'test3', status: 2 },
-        // { id: 7, title: 'test4'.repeat(40), status: 3 },
-      ],
+      items: [],
       modal: null
     }
   }
@@ -60,11 +51,6 @@ export default class extends Component {
       })
   }
 
-  getEventIntent() {
-    // todo - /event/:id/:action
-    // view - edit - make
-  }
-
   openModal(name, data) {
     this.setState({ modal: { name, data } })
   }
@@ -77,11 +63,26 @@ export default class extends Component {
   }
 
   renderEventItem(item) {
-    var status = ['done', 'halt', 'busy', 'idle'][item.status]
+    const expire = this.getEventExpire(item)
+    var statusTheme = ['done', 'halt', 'busy', 'idle'][item.status]
+    var expectTheme = ['halt', 'busy', 'done'][this.levelExpect(item.expect)]
+    var expireTheme = ['halt', 'busy', 'done'][this.levelExpire(expire)]
     return (
       <div className='event-item' key={item.id}>
-        <div><a className={'badge area-stroke area-' + status}>{status}</a></div>
-        <div className='event-name'><p>{item.title}</p></div>
+        <div className='event-status'>
+          <a className={'badge area-' + statusTheme} />
+        </div>
+        <div className='event-title'><p>{item.title}</p></div>
+        <div className='event-expect'>
+          <a className={'badge area-stroke area-' + expectTheme}>
+            { 'expect ' + humanDuration(item.expect) }
+          </a>
+        </div>
+        <div className='event-expire'>
+          <a className={'badge area-stroke area-' + expireTheme}>
+            { (expire > 0 ? 'remain' : 'expire') + ' ' + humanDuration(expire) }
+          </a>
+        </div>
         <div className='control'>
           <a className='btn' onClick={e => this.openModal('event-view', { model: item })}>
             <i className='md-icons'>info_outline</i>
@@ -95,6 +96,22 @@ export default class extends Component {
         </div>
       </div>
     )
+  }
+
+  levelExpect(expect) {
+    let level = Math.floor(Math.log10(expect || 1)) - 1
+    if (level < 0) level = 0
+    return level
+  }
+
+  levelExpire(expire) {
+    if (expire > 30) return 2
+    if (expire > 0 && expire < 30) return 1
+    return 0
+  }
+
+  getEventExpire(item) {
+    return item.expect - Math.abs(new Date(item.created_at) - Date.now()) / 60000
   }
 
   getProgress() {
@@ -137,7 +154,7 @@ export default class extends Component {
             <input type='text' />
             <a className='btn'>Sort By</a>
           </div>
-          <div className='event-name'>
+          <div className='event-title'>
             <p>{ model && model.title }</p>
           </div>
         </div>

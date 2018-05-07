@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import 'whatwg-fetch'
 import Modal from '../../../component/Modal'
 import Field from '../../../component/Field'
+import { parseDuration } from '../../../component/script/utility'
 
 export default class ModalEventEdit extends Component {
   constructor(props) {
@@ -12,10 +13,7 @@ export default class ModalEventEdit extends Component {
     }
   }
 
-  saveEvent() {
-    const { model } = this.props
-    const { input } = this.state
-    input.parent = model.id
+  saveEvent(input) {
     fetch('/api/saveEvent', {
       method: 'POST',
       headers: {
@@ -39,9 +37,19 @@ export default class ModalEventEdit extends Component {
     })
   }
 
-  changeInput(key, value) {
+  submitInput(e) {
+    e.preventDefault()
+    const { model } = this.props
+    const input = Object.assign({}, this.state.input)
+    input.parent = model ? model.id : '-1'
+    const expect = parseDuration(input.expect)
+    input.expect = Math.floor(Number(expect.as('minutes')) || 5)
+    this.saveEvent(input)
+  }
+
+  changeInput(key, e) {
     const { input } = this.state
-    input[key] = value
+    input[key] = e.target.value
     this.setState({ input })
   }
 
@@ -54,15 +62,18 @@ export default class ModalEventEdit extends Component {
         </div>
         <div className='card'>
           <form>
-            <Field theme='idle' label='title' 
-              onChange={value => this.changeInput('title', value)} />
-            <Field theme='idle' label='content'
-              onChange={value => this.changeInput('content', value)} />
-            <Field theme='idle' label='expect'
-              onChange={value => this.changeInput('expect', value)} />
+            <Field theme='idle' label='title'>
+              <input onChange={e => this.changeInput('title', e)} />
+            </Field>
+            <Field theme='idle' label='content'>
+              <textarea rows={3} onChange={e => this.changeInput('content', e)} />
+            </Field>
+            <Field theme='idle' label='expect'>
+              <input onChange={e => this.changeInput('expect', e)} />
+            </Field>
           </form>
         </div>
-        <a className='btn btn-large area-done' onClick={e => this.saveEvent()}>
+        <a className='btn btn-large area-done' onClick={e => this.submitInput(e)}>
           <i className='md-icons'>done</i>
           <span>save event</span>
         </a>

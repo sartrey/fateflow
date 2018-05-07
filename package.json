@@ -33,6 +33,7 @@
     "sequelize": "^4.37.6"
   },
   "devDependencies": {
-    "epii-render": "^0.6.2"
+    "epii-render": "^0.6.2",
+    "moment": "^2.22.1"
   }
 }

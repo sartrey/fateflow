@@ -5,5 +5,9 @@
 
   form {
     flex: 1;
+
+    textarea {
+      resize: none;
+    }
   }
 }
